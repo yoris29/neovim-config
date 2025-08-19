@@ -128,3 +128,15 @@ require("lspconfig").clangd.setup{
 }
 
 vim.diagnostic.disable()
+
+
+-- Autoformat on save
+vim.api.nvim_create_augroup("AutoFormatting", {})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = "AutoFormatting",
+  callback = function()
+    vim.lsp.buf.format({ async = false }) -- sync format before save
+  end,
+})
+
