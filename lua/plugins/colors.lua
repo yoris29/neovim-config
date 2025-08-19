@@ -52,6 +52,13 @@ return {
 		    dark = "dragon",           -- try "dragon" !
 		    light = "lotus"
 		},
+	        overrides = function(colors)
+		   return {
+		     LineNr = { bg = "NONE" },
+		     CursorLineNr = { bg = "NONE" },
+		     SignColumn = { bg = "NONE" },
+		   }
+		end,
 	    })
 	
 	end
