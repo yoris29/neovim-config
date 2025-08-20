@@ -119,15 +119,11 @@ for _, server in ipairs(servers) do
 	})
 end
 
-
-require("lspconfig").clangd.setup {
-	cmd = {
-		"clangd",
-		"--query-driver=C:/Users/Asus/scoop/apps/gcc/current/bin/*"
-	}
+require('lspconfig').clangd.setup {
+	cmd = { "clangd", "--query-driver=C:\\Users\\Asus\\scoop\\apps\\gcc\\current\\bin\\gcc.exe\\*" }
 }
 
-vim.diagnostic.disable()
+--vim.diagnostic.disable()
 
 
 -- Autoformat on save
@@ -140,5 +136,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+-- Tab spacing
 vim.opt.tabstop = 4    -- Number of spaces a <Tab> counts for
 vim.opt.shiftwidth = 4 -- Number of spaces used for autoindent
