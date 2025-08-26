@@ -57,7 +57,7 @@ require("mason-lspconfig").setup({
 
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local servers = { "lua_ls", "clangd", "pyright", "ts_ls" }
+local servers = { "lua_ls", "pyright", "ts_ls" }
 
 -- Completion config
 -- nvim-cmp setup
@@ -119,11 +119,23 @@ for _, server in ipairs(servers) do
 	})
 end
 
-require('lspconfig').clangd.setup {
-	cmd = { "clangd", "--query-driver=C:\\Users\\Asus\\scoop\\apps\\gcc\\current\\bin\\gcc.exe\\*" }
+-- Set up clangd separately with query-driver
+lspconfig.clangd.setup {
+	cmd = {
+		"clangd",
+		"--header-insertion=never",
+		"--query-driver=C:/Users/Asus/scoop/apps/gcc/current/bin/*",
+		"--extra-arg=-isystemC:/Users/Asus/scoop/apps/gcc/current/include",
+		"--extra-arg=-isystemC:/Users/Asus/scoop/apps/gcc/current/lib/gcc/x86_64-w64-mingw32/13.2.0/include",
+		"--extra-arg=-isystemC:/Users/Asus/scoop/apps/gcc/current/x86_64-w64-mingw32/include"
+	},
+
+
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
---vim.diagnostic.disable()
+-- vim.diagnostic.disable()
 
 
 -- Autoformat on save
